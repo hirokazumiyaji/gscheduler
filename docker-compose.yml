@@ -1,0 +1,23 @@
+app:
+  build: .
+  command: bash -c "bundle install --path=vendor/bundle && bundle exec rake db:migrate && bundle exec rails server -b 0.0.0.0 -p 3000"
+  ports:
+    - "3000:3000"
+  links:
+    - db
+    - redis
+  environment:
+    - DATABASE_USER=postgres
+    - DATABASE_PASSWORD=postgres
+    - DATABASE_URL=postgresql://db/schedule
+    - REDIS_URL=redis://redis/0/cache
+    - SECRET_KEY_BASE=c9f62daaa173367ad33eee1cce39feb9d93e77d34aa3dd77a3645421f77906b5fc6a5c090b95aa94b766742de70d99aac780ad64042e7ddfa7834e7cf91eadd6
+  volumes:
+    - ./:/root/app/
+db:
+  image: postgres
+  environment:
+    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_DB=schedule
+redis:
+  image: redis
