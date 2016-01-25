@@ -4,11 +4,11 @@ class Admin::UsersController < AdminController
   end
 
   def create
-    @user = User.find(params[:id])
+    @user = User.new(user_params)
     @user.sign_in_id = @user.uuid
 
     if @user.save
-      redirect_to @user
+      redirect_to admin_users_url
     else
       render 'new'
     end
@@ -30,7 +30,7 @@ class Admin::UsersController < AdminController
     @user = User.find(params[:id])
 
     if @user.update(user_params)
-      redirect_to @user
+      redirect_to admin_users_url
     else
       render 'edit'
     end
@@ -38,12 +38,12 @@ class Admin::UsersController < AdminController
 
   def destroy
     ApplicationRecord.transaction do
-      User.destroy!(params[:id])
-      ScheduleUser.destroy_all!(user_id: params[:id])
-      RoleMember.destroy_all!(user_id: params[:id])
+      User.destroy(params[:id])
+      ScheduleUser.destroy_all(user_id: params[:id])
+      RoleMember.destroy_all(user_id: params[:id])
     end
 
-    redirect_to admin_users_path
+    redirect_to admin_users_url
   end
 
   private

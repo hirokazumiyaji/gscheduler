@@ -4,12 +4,19 @@
     </div>
     <div class="row">
       <div class="col s12 m9 l10">
+        <div style="position: relative;">
+          <div class="fixed-action-btn horizontal" style="position: absolute; display: inline-block; right: 24px;">
+            <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+          </div>
+        </div>
         <div class="tables" class="section scrollspy">
           <p class="caption"></p>
-          <h2 class="header"></h2>
+          <h2 class="header">
+            Users
+          </h2>
+
           <div class="row">
             <div class="col s12">
-              <p></p>
               <table>
                 <thead>
                   <tr>
@@ -17,15 +24,32 @@
                     <th data-field="name">Name</th>
                     <th data-field="email">Email</th>
                     <th data-field="sign_in_url">Sign in URL</th>
+                    <th data-field="buttons"></th>
                   </tr>
                 </thead>
                 <tbody>
                   <% @users.each do |user| %>
                     <tr>
-                      <td><%= user.id %></td>
-                      <td><%= user.name %></td>
-                      <td><%= user.email %></td>
-                      <td><%= user.sign_in_url %></td>
+                      <td>
+                        <%= user.id %>
+                      </td>
+                      <td>
+                        <%= user.name %>
+                      </td>
+                      <td>
+                        <%= user.email %>
+                      </td>
+                      <td>
+                        <%= url_for(controller: '/users', action: 'sign_in', id: user.sign_in_id, only_path: false) %>
+                      </td>
+                      <td>
+                        <%= link_to edit_admin_user_path(user), class: 'btn-floating btn-small' do %>
+                          <i class="small material-icons">mode_edit</i>
+                        <% end %>
+                        <a class="btn-floating btn-small" onclick="deleteUser(<%= user.id %>)">
+                          <i class="small material-icons">delete</i>
+                        </a>
+                      </td>
                     </tr>
                   <% end %>
                 </tbody>
@@ -36,3 +60,21 @@
     </div>
   </div>
 </main>
+<script>
+function deleteUser(user_id) {
+  var href = '/admin/users/' + user_id,
+  method = 'delete',
+  csrf_token = $('meta[name=csrf-token]').attr('content'),
+  csrf_param = $('meta[name=csrf-param]').attr('content'),
+  form = $('<form method="post" action="' + href + '"></form>'),
+  metadata_input = '<input name="_method" value="' + method + '" type="hidden" />';
+
+  if (csrf_param !== undefined && csrf_token !== undefined) {
+    metadata_input += '<input name="' + csrf_param + '" value="' + csrf_token + '" type="hidden" />';
+  }
+
+
+  form.hide().append(metadata_input).appendTo('body');
+  form.submit();
+}
+</script>

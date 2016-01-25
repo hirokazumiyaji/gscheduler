@@ -1,2 +1,26 @@
-<% form_for(@user) do |f| %>
-<% end %>
+<div class="row">
+  <div class="row">
+    <% if @user.id.nil? %>
+      <h3>Regist User</h3>
+    <% else %>
+      <h3>Edit User: <%= @user.id %></h3>
+    <% end %>
+  </div>
+  <%= form_for([:admin, @user], html: {class: 'col s12'}) do |f| %>
+    <div class="row">
+      <div class="input-field col s8">
+        <%= f.text_field :name, class: 'validate', placeholder: 'Name' %>
+        <%= f.label :name, for: 'user_name' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s8">
+        <%= f.text_field :email, class: 'validate', placeholder: 'Email' %>
+        <%= f.label :emal, for: 'user_email' %>
+      </div>
+    </div>
+    <div class="row">
+      <%= f.submit 'Save', class: 'btn waves-effect waves-light blue lighten-3' %>
+    </div>
+  <% end %>
+</div>
