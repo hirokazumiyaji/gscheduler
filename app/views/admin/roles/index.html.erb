@@ -1,0 +1,71 @@
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="tables" class="section scrollspy">
+        <h2 class="header">
+          Roles
+        </h2>
+        <div class="row">
+          <div class="col s12">
+            <table>
+              <thead>
+                <tr>
+                  <th data-field="id">ID</th>
+                  <th data-field="name">Name</th>
+                  <th data-field="members">Members</th>
+                  <th data-field="buttons"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @roles.each do |role| %>
+                  <tr>
+                    <td>
+                      <%= role.id %>
+                    </td>
+                    <td>
+                      <%= role.name %>
+                    </td>
+                    <td>
+                      <% role.members.each do |member| %>
+                        <div class="col s4">
+                          <%= member.user.name %>
+                        </div>
+                      <% end %>
+                    </td>
+                    <td>
+                      <div class="row">
+                        <%= link_to edit_admin_role_path(role), class: 'btn-floating btn-small' do %>
+                          <i class="small material-icons">mode_edit</i>
+                        <% end %>
+                        <a class="btn-floating btn-small" onclick="deleteRole(<%= role.id %>)">
+                          <i class="small material-icons">delete</i>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<script>
+function deleteRole(role_id) {
+  var href = '/admin/roles/' + role_id,
+  method = 'delete',
+  csrf_token = $('meta[name=csrf-token]').attr('content'),
+  csrf_param = $('meta[name=csrf-param]').attr('content'),
+  form = $('<form method="post" action="' + href + '"></form>'),
+  metadata_input = '<input name="_method" value="' + method + '" type="hidden" />';
+
+  if (csrf_param !== undefined && csrf_token !== undefined) {
+    metadata_input += '<input name="' + csrf_param + '" value="' + csrf_token + '" type="hidden" />';
+  }
+
+  form.hide().append(metadata_input).appendTo('body');
+  form.submit();
+}
+</script>

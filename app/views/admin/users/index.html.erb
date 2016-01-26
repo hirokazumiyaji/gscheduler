@@ -73,7 +73,6 @@ function deleteUser(user_id) {
     metadata_input += '<input name="' + csrf_param + '" value="' + csrf_token + '" type="hidden" />';
   }
 
-
   form.hide().append(metadata_input).appendTo('body');
   form.submit();
 }

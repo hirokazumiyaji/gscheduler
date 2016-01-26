@@ -7,6 +7,7 @@ gem "uglifier", ">= 1.3.0"
 gem "therubyracer", platforms: :ruby
 gem "jbuilder", "~> 2.0"
 gem "puma"
+gem "activerecord-import"
 
 
 group :development, :test do
