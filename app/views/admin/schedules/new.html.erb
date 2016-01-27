@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="row">
+    <div class="col s12 m12 l12">
+      <div class="card-panel">
+        <h4 class="header2">Schedule</h2>
+        <div class="row">
+          <%= form_for(@schedule, html: {class: 'col s12'}) do |f| %>
+            <div class="row">
+              <div class="input-field col s12">
+                <%= f.text_field :title %>
+                <%= f.label :title, for: 'schedule_title' %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <%= f.text_field :start_at %>
+                <%= f.label :start_at, for: 'schedule_start_at' %>
+              </div>
+              <div class="input-field col s6">
+                <%= f.text_field :end_at %>
+                <%= f.label :end_at, for: 'schedule_end_at' %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <%= f.text_field :registration_start_at %>
+                <%= f.label :registration_start_at, for: 'schedule_registration_start_at' %>
+              </div>
+              <div class="input-field col s6">
+                <%= f.text_field :registration_end_at %>
+                <%= f.label :registration_end_at, for: 'schedule_registration_end_at' %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <%= f.text_field :place %>
+                <%= f.label :place, for: 'schedule_place' %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <%= f.text_area :note, class: 'materialize-textarea', row: 3 %>
+                <%= f.label :note, for: 'schedule_note' %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12 right-align">
+                <% if @schedule.id.nil? %>
+                <%= f.button class: 'btn cyan waves-effect waves-light' do %>
+                  <i class="mdi-content-send right"></i>
+                  Register
+                <% end %>
+                <% else %>
+                <%= f.button class: 'btn cyan waves-effect waves-light' do %>
+                  <i class="mdi-content-send right"></i>
+                  Submit
+                <% end %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -47,7 +47,7 @@ class Admin::RolesController < AdminController
       RoleMember.where.not(user_id: params[:role][:member_ids]).delete_all
       user_ids = RoleMember.pluck :user_id
       role_members = params[:role][:member_ids].select{|member_id| !user_ids.include?(member_id)}.map do |member_id|
-        RoleMember.new(role_id: @role.id, user_id: member_id)
+        RoleMember.new(role_id: params[:id], user_id: member_id)
       end
       RoleMember.import role_members
     end

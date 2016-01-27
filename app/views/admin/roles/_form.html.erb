@@ -12,8 +12,10 @@
       <% @role_members.sort{|member1, member2| member1.user.id <=> member2.user.id}.each do |member| %>
         <div class="col s6">
           <p>
-          <input type="checkbox" id="role_member_ids_<%= member.user.id %>" name="role[member_ids][]" class="filled-in" value="<%= member.user.id %>" <% unless member.id.nil? %>checked<% end %>/>
-          <label id="role_member_ids_<%= member.user.id %>" for="role_member_ids_<%= member.user.id %>"><%= member.user.name %>(<%= member.id %>)</label>
+            <input type="checkbox" id="role_member_ids_<%= member.user.id %>" name="role[member_ids][]" class="filled-in" value="<%= member.user.id %>"<% unless member.id.nil? %> checked<% end %> />
+            <label id="role_member_ids_<%= member.user.id %>" for="role_member_ids_<%= member.user.id %>">
+              <%= member.user.name %>
+            </label>
           </p>
         </div>
       <% end %>

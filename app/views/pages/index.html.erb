@@ -1,0 +1,112 @@
+<div class="main">
+  <div class="wrapper">
+    <aside id="left-sidebar-nav">
+      <ul id="side-out" class="side-nav leftside-navigation ps-container ps-active-y" style="left: -250px; height: 697px;">
+        <li class="bold">
+          <a href="<%= edit_user_path(@user) %>" class="waves-effect waves-cyan">
+            Me
+          </a>
+        </li>
+        <li class="bold">
+          <a href="<%= users_path %>" class="waves-effect waves-cyan">
+            <i></i>
+            Users
+          </a>
+        </li>
+        <li class="bold">
+          <a href="<%= schedules_path %>" class="waves-effect waves-cyan">
+            <i class="mdi-editor-insert-invitation"></i>
+            Schedules
+          </a>
+        </li>
+      </ul>
+      <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan">
+        <i class="mdi-navigation-menu"></i>
+      </a>
+    </aside>
+    <section class="content">
+      <div class="container">
+        <div id="profile-page-header" class="card">
+          <div class="card-content">
+            <div class="row">
+              <div class="col s10">
+                <div class="row">
+                  <div class="col s5">
+                    Name
+                  </div>
+                  <div class="col s7">
+                    <%= @user.name %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col s5">
+                    Email
+                  </div>
+                  <div class="col s7">
+                    <%= @user.email %>
+                  </div>
+                </div>
+              </div>
+              <div class="col s2 right-align">
+                <a href="<%= edit_user_path(@user) %>" class="btn-floating activator waves-effect waves-light darken-2 right">
+                  <i class="mdi-action-perm-identity"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="profile-page-content" class="row">
+          <% @schedules.each do |schedule| %>
+          <div class="col s12 m6">
+            <div class="card">
+              <div class="card-content">
+                <div class="row">
+                  <span class="card-title"><%= schedule.title %></span>
+                </div>
+                <div class="row">
+                  <div class="col s3">
+                    <i class="mdi-action-done"></i>
+                  </div>
+                  <div class="col s9">
+                    <%= schedule.start_at %>&nbsp;-&nbsp;<%= schedule.end_at %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col s3">
+                    regist period
+                  </div>
+                  <div class="col s9">
+                    <%= schedule.registration_start_at %>&nbsp;-&nbsp;<%= schedule.registration_end_at %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col s3">
+                    <i class="mdi-communication-location-on"></i>
+                  </div>
+                  <div class="col s9">
+                    <%= schedule.place %>
+                  </div>
+                </div>
+                <div class="row">
+                  <i class="mdi-content-clear"></i>
+                </div>
+              </div>
+              <div class="card-action">
+                <% if schedule.register? %>
+                <a href="" class="btn">Participate</a>
+                <a href="" class="btn">Absent</a>
+                <a href="" class="btn">Undecided</a>
+                <% else %>
+                <a href="" class="btn disabled">Participate</a>
+                <a href="" class="btn disabled">Absent</a>
+                <a href="" class="btn disabled">Undecided</a>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

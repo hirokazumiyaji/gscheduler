@@ -1,26 +1,38 @@
 <div class="row">
-  <div class="row">
-    <% if @user.id.nil? %>
-      <h3>Regist User</h3>
-    <% else %>
-      <h3>Edit User: <%= @user.id %></h3>
-    <% end %>
+  <div class="col s12 m12 l12">
+    <div class="card-panel">
+      <div class="row">
+        <%= form_for([:admin, @user], html: {class: 'col s12'}) do |f| %>
+          <h4 class="header2">
+          </h4>
+          <div class="row">
+            <div class="input-field col s4">
+              <i class="mdi-action-account-circle prefix active"></i>
+              <%= f.text_field :name, class: 'validate', placeholder: 'Name' %>
+              <%= f.label :name, for: 'user_name', class: 'active' %>
+            </div>
+            <div class="input-field col s4">
+              <i class="mdi-communication-email prefix active"></i>
+              <%= f.text_field :email, class: 'validate', placeholder: 'Email' %>
+              <%= f.label :emal, for: 'user_email', class: 'active' %>
+            </div>
+            <div class="input-field col s4">
+              <div class="input-field col s12">
+                <% if @user.id.nil? %>
+                  <%= f.button class: 'btn cyan waves-effect waves-light' do %>
+                    <i class="mdi-action-perm-identity"></i>
+                    Register
+                  <% end %>
+                <% else %>
+                  <%= f.button class: 'btn cyan waves-effect waves-light' do %>
+                    <i class="mdi-content-send right"></i>
+                    Submit
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+         </div>
+      <% end %>
+    </div>
   </div>
-  <%= form_for([:admin, @user], html: {class: 'col s12'}) do |f| %>
-    <div class="row">
-      <div class="input-field col s8">
-        <%= f.text_field :name, class: 'validate', placeholder: 'Name' %>
-        <%= f.label :name, for: 'user_name' %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s8">
-        <%= f.text_field :email, class: 'validate', placeholder: 'Email' %>
-        <%= f.label :emal, for: 'user_email' %>
-      </div>
-    </div>
-    <div class="row">
-      <%= f.submit 'Save', class: 'btn waves-effect waves-light green lighten-3' %>
-    </div>
-  <% end %>
 </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= ENV['GROUP_NAME'] %> スケジューラー</title>
+    <title><%= ENV['GROUP_NAME'] %> スケジューラー Admin</title>
     <%= csrf_meta_tags %>
 
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Inconsolata" type="text/css">
@@ -13,23 +13,19 @@
   </head>
 
   <body>
-    <header id="header" class="page-topbar">
-      <div class="navbar-fixed">
-        <nav class="teal darken-3">
-          <div class="nav-wrapper">
-            <ul class="left">
-              <li>
-                <a href=""><h3><span class="logo-text"><%= ENV['GROUP_NAME'] %></span></h3></a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <%= yield :header %>
-    <%= yield %>
+    <%= render 'header' %>
+    <div id="main">
+      <div class="wrapper">
+        <%= render 'aside' %>
+        <section class="content">
+          <%= yield %>
+        </section>
+    <footer class="page-footer">
+      <%= yield :footer %>
+    </footer>
     <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-    <%= yield :footer %>
+    <%= render 'aside_footer' %>
+    <%= yield :footer_script %>
   </body>
 </html>

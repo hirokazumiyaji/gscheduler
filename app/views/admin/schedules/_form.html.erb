@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="row">
+  </div>
+  <%= form_for([:admin, @schedule], html: {class: 'col s12'}) do |f| %>
+    <div class="row">
+      <div class="input-field col s8">
+        <%= f.text_field :title, class: 'validate', placeholder: 'Title' %>
+        <%= f.label :title, for: 'schedule_title' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+      </div>
+      <div class="input-field col s6">
+      </div>
+    </div>
+    <% if @roles.any? %>
+    <div class="row">
+      <% @roles.sort{|role1, role2| role1.id <=> role2.id}.each do |role| %>
+        <div class="col s6">
+          <p>
+            <input type="checkbox" id="schedule_role_ids_<%= role.role_id %>" name="schedule[role_ids][]" class="filled-in" value="<%= role.role_id %>"<% unless role.id.nil? %> checked<% end %> />
+            <label id="schedule_role_ids_<%= role.role_id %>" for="schedule_role_ids_<%= role.role_id %>">
+              <%= role.role.name %>
+            </label>
+          </p>
+        </div>
+      <% end %>
+    </div>
+    <% end %>
+    <div class="row">
+      <%= f.submit 'Save', class: 'btn waves-effect waves-light green lighten-3' %>
+    </div>
+  <% end %>
+</div>

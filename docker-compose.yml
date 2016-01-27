@@ -7,6 +7,7 @@ app:
     - db
     - redis
   environment:
+    - GROUP_NAME=Group Name
     - DATABASE_USER=postgres
     - DATABASE_PASSWORD=postgres
     - DATABASE_URL=postgresql://db/schedule
