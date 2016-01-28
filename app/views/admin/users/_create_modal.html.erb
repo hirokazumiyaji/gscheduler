@@ -1,0 +1,31 @@
+<div id="modal-create" class="modal">
+  <div class="modal-content">
+    <h4>User</h4>
+    <div class="row">
+      <%= form_for([:admin, @user], html: {class: 'col s12'}) do |f| %>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="mdi-action-account-circle prefix active"></i>
+            <%= f.text_field :name, class: 'validate', placeholder: 'Name' %>
+            <%= f.label :name, for: 'user_name', class: 'active' %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="mdi-communication-email prefix active"></i>
+            <%= f.text_field :email, class: 'validate', placeholder: 'Email' %>
+            <%= f.label :emal, for: 'user_email', class: 'active' %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 right-align">
+            <%= f.button class: 'btn cyan waves-effect waves-light' do %>
+              <i class="mdi-action-perm-identity"></i>
+              Register
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

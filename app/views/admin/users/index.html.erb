@@ -1,60 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col s12 m9 l10">
-      <div class="tables" class="section scrollspy">
-        <h2 class="header">
-          Users
-        </h2>
-        <div class="row">
-          <div class="col s12">
-            <table>
-              <thead>
-                <tr>
-                  <th data-field="id">ID</th>
-                  <th data-field="name">Name</th>
-                  <th data-field="email">Email</th>
-                  <th data-field="sign_in_url">Sign in URL</th>
-                  <th data-field="buttons"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @users.sort{|user1, user2| user1.id <=> user2.id}.each do |user| %>
-                  <tr>
-                    <td>
-                      <%= user.id %>
-                    </td>
-                    <td>
-                      <%= user.name %>
-                    </td>
-                    <td>
-                      <%= user.email %>
-                    </td>
-                    <td>
-                      <%= url_for(controller: '/users', action: 'sign_in', id: user.sign_in_id, only_path: false) %>
-                    </td>
-                    <td>
-                      <%= link_to edit_admin_user_path(user), class: 'btn-floating btn-small' do %>
-                        <i class="small material-icons">mode_edit</i>
-                      <% end %>
-                      <a href="#modal-<%= user.id %>" class="btn-floating btn-small modal-trigger">
-                        <i class="small material-icons">delete</i>
-                      </a>
-                      <div id="modal-<%= user.id %>" style="display:none;">
-                        <div class="modal-content">
-                          delete ?
-                        </div>
-                        <div class="modal-footer">
-                          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      <h2 class="header">
+        Users
+      </h2>
+      <% @users.sort{|user1, user2| user1.id <=> user2.id}.each do |user| %>
+      <%= render partial: 'profile_card', locals: {user: user} %>
+      <% end %>
     </div>
   </div>
   <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
@@ -62,37 +14,8 @@
       <i class="material-icons">add</i>
     <% end %>
   </div>
-  <div id="modal-create" class="modal">
-    <div class="modal-content">
-      <h4>User</h4>
-      <div class="row">
-        <%= form_for([:admin, @user], html: {class: 'col s12'}) do |f| %>
-          <div class="row">
-            <div class="input-field col s12">
-              <i class="mdi-action-account-circle prefix active"></i>
-              <%= f.text_field :name, class: 'validate', placeholder: 'Name' %>
-              <%= f.label :name, for: 'user_name', class: 'active' %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <i class="mdi-communication-email prefix active"></i>
-              <%= f.text_field :email, class: 'validate', placeholder: 'Email' %>
-              <%= f.label :emal, for: 'user_email', class: 'active' %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12 right-align">
-              <%= f.button class: 'btn cyan waves-effect waves-light' do %>
-                <i class="mdi-action-perm-identity"></i>
-                Register
-              <% end %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
+  <%= render 'create_modal' %>
+  <%= render 'delete_modal' %>
 </div>
 <script>
 

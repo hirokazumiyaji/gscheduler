@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content">
+        <div class="row">
+          <%= user.name %>
+        </div>
+        <div class="row">
+          <div class="col s1">
+            <i class="mdi-communication-email"></i>
+          </div>
+          <div class="col s9">
+            <%= user.email %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s1">
+            <i class="mdi-action-open-in-browser"></i>
+          </div>
+          <div class="col s9">
+            <p>
+              <%= url_for(controller: '/users', action: 'sign_in', id: user.sign_in_id, only_path: false) %>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6">
+            <%= link_to 'Edit', edit_admin_user_path(user), class: 'btn cyan waves-effect waves-light' %>
+          </div>
+          <div class="col s6">
+            <%= link_to 'Delete', {}, onclick: "$('#form-delete').attr('action', '#{admin_user_path(user)}');$('#modal-delete').openModal(); return false;", class: 'btn cyan waves-effect waves-light' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
